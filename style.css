@@ -60,3 +60,31 @@ header {
     background: darkgray;
   }
   
+.leaderboard {
+    width: 80%;
+    max-width: 600px;
+    height: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #111;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(255, 255, 0, 0.3);
+    overflow-y: auto;
+    border: 2px solid #ff0;
+}
+
+.leaderboard ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.leaderboard li {
+    padding: 10px;
+    font-size: 20px;
+    border-bottom: 1px solid #ff0;
+}
+
+.leaderboard li:last-child {
+    border-bottom: none;
+}
