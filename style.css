@@ -87,6 +87,7 @@ header {
 
 .leaderboard li:last-child {
     border-bottom: none;
+}
 
 .forum-container {
     max-width: 600px;
