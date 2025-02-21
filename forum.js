@@ -10,27 +10,33 @@ const firebaseConfig = {
     appId: "1:989555896531:web:7e63adcd04066f3343a426"
 };
 
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
 
-document.getElementById("login-btn").addEventListener("click", () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    auth.signInWithPopup(provider).then(result => {
+document.getElementById("login-btn").addEventListener("click", async () => {
+    try {
+        const result = await signInWithPopup(auth, provider);
         console.log("User signed in:", result.user);
         document.getElementById("login-btn").style.display = "none";
         document.getElementById("logout-btn").style.display = "block";
-    }).catch(error => console.error(error));
+    } catch (error) {
+        console.error("Login Error:", error);
+    }
 });
 
-document.getElementById("logout-btn").addEventListener("click", () => {
-    auth.signOut().then(() => {
+document.getElementById("logout-btn").addEventListener("click", async () => {
+    try {
+        await signOut(auth);
         console.log("User signed out");
         document.getElementById("login-btn").style.display = "block";
         document.getElementById("logout-btn").style.display = "none";
-    });
+    } catch (error) {
+        console.error("Logout Error:", error);
+    }
 });
 
-auth.onAuthStateChanged(user => {
+onAuthStateChanged(auth, (user) => {
     if (user) {
         document.getElementById("login-btn").style.display = "none";
         document.getElementById("logout-btn").style.display = "block";
