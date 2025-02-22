@@ -10,12 +10,16 @@ const firebaseConfig = {
     appId: "1:989555896531:web:7e63adcd04066f3343a426"
 };
 
+console.log("Initializing Firebase...");
 const app = initializeApp(firebaseConfig);
+console.log("Firebase Initialized:", app);
+
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
 document.getElementById("login-btn").addEventListener("click", async () => {
     try {
+        console.log("Login button clicked.");
         const result = await signInWithPopup(auth, provider);
         console.log("User signed in:", result.user);
         document.getElementById("login-btn").style.display = "none";
@@ -27,6 +31,7 @@ document.getElementById("login-btn").addEventListener("click", async () => {
 
 document.getElementById("logout-btn").addEventListener("click", async () => {
     try {
+        console.log("Logout button clicked.");
         await signOut(auth);
         console.log("User signed out");
         document.getElementById("login-btn").style.display = "block";
@@ -37,6 +42,7 @@ document.getElementById("logout-btn").addEventListener("click", async () => {
 });
 
 onAuthStateChanged(auth, (user) => {
+    console.log("Auth state changed:", user);
     if (user) {
         document.getElementById("login-btn").style.display = "none";
         document.getElementById("logout-btn").style.display = "block";
